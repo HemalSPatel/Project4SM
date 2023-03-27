@@ -3,7 +3,7 @@ package com.example.rucafe.project4sm;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class HelloController {
+public class RUCafeController {
     @FXML
     private Label welcomeText;
 
