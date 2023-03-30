@@ -37,7 +37,7 @@
             </BorderPane>
             <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                <center>
-                  <Button id="order_coffee" contentDisplay="TOP" mnemonicParsing="false" text="Order Coffee" BorderPane.alignment="CENTER">
+                  <Button id="order_coffee" fx:id="order_coffee" contentDisplay="TOP" mnemonicParsing="false" onAction="#onOrderCoffeeClick" text="Order Coffee" BorderPane.alignment="CENTER">
                      <graphic>
                         <ImageView fitHeight="96.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -50,7 +50,7 @@
             </BorderPane>
             <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                <center>
-                  <Button id="your_order" contentDisplay="TOP" mnemonicParsing="false" text="Your Order" BorderPane.alignment="CENTER">
+                  <Button id="your_order" fx:id="your_order" contentDisplay="TOP" mnemonicParsing="false" onAction="#onYourOrderClick" text="Your Order" BorderPane.alignment="CENTER">
                      <graphic>
                         <ImageView fitHeight="95.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -63,7 +63,7 @@
             </BorderPane>
             <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <center>
-                  <Button contentDisplay="TOP" mnemonicParsing="false" text="Store Order" BorderPane.alignment="CENTER">
+                  <Button fx:id="store_order" contentDisplay="TOP" mnemonicParsing="false" onAction="#onStoreOrderClick" text="Store Order" BorderPane.alignment="CENTER">
                      <graphic>
                         <ImageView id="store_order" fitHeight="94.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true">
                            <image>
