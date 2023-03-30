@@ -17,8 +17,11 @@ public class RUCafeController {
 
     @FXML
     private Button order_donut;
+    @FXML
     private Button order_coffee;
+    @FXML
     private Button your_order;
+    @FXML
     private Button store_order;
 
     @FXML
