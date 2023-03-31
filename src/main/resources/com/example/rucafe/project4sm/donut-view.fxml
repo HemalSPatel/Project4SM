@@ -23,20 +23,20 @@
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="45.0">
                <children>
                   <ComboBox fx:id="combo_donut_type" prefWidth="150.0" promptText="Type" visibleRowCount="3" />
-                  <ImageView fitHeight="120.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="image_donut" fitHeight="120.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/yeast_donut.png" />
+                        <Image url="@images/Yeast.png" />
                      </image>
                   </ImageView>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="25.0">
+            <HBox alignment="CENTER" prefHeight="203.0" prefWidth="603.0" spacing="25.0">
                <children>
                   <ListView prefHeight="200.0" prefWidth="200.0" />
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                  <VBox alignment="CENTER" prefHeight="111.0" prefWidth="100.0" spacing="10.0">
                      <children>
                         <ComboBox fx:id="combo_donut_num" prefWidth="150.0" promptText="1" visibleRowCount="12" />
                         <Button mnemonicParsing="false" text="&gt;&gt;" />

@@ -15,7 +15,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="474.0" prefWidth="449.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rucafe.project4sm.CoffeeController">
    <top>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
@@ -51,8 +50,8 @@
             <CheckBox fx:id="cb_IC" mnemonicParsing="false" text="Irish Cream" GridPane.rowIndex="2" />
             <CheckBox fx:id="cb_Mocha" mnemonicParsing="false" text="Mocha" GridPane.columnIndex="1" />
             <CheckBox fx:id="cb_Caramel" mnemonicParsing="false" text="Caramel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <ComboBox fx:id="coffee_size" prefWidth="150.0" GridPane.columnIndex="2" />
-            <ComboBox fx:id="num_coffee" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <ComboBox fx:id="coffee_size" prefWidth="150.0" promptText="Size" GridPane.columnIndex="2" />
+            <ComboBox fx:id="num_coffee" prefWidth="150.0" promptText="Quantity" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <TextField fx:id="coffee_subtotal" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          </children>
          <opaqueInsets>
