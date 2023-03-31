@@ -35,22 +35,22 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="203.0" prefWidth="603.0" spacing="25.0">
                <children>
-                  <ListView prefHeight="200.0" prefWidth="200.0" />
+                  <ListView fx:id="lv_donutflavor" prefHeight="200.0" prefWidth="200.0" />
                   <VBox alignment="CENTER" prefHeight="111.0" prefWidth="100.0" spacing="10.0">
                      <children>
                         <ComboBox fx:id="combo_donut_num" prefWidth="150.0" promptText="1" visibleRowCount="12" />
-                        <Button mnemonicParsing="false" text="&gt;&gt;" />
-                        <Button mnemonicParsing="false" text="&lt;&lt;" />
+                        <Button fx:id="b_donutadd" mnemonicParsing="false" text="&gt;&gt;" />
+                        <Button fx:id="b_donutremove" mnemonicParsing="false" text="&lt;&lt;" />
                      </children>
                   </VBox>
-                  <ListView prefHeight="200.0" prefWidth="200.0" />
+                  <ListView fx:id="lv_donutpicked" prefHeight="200.0" prefWidth="200.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="25.0">
                <children>
                   <Label prefHeight="27.0" prefWidth="73.0" text="Subtotal: " />
-                  <TextField editable="false" />
-                  <Button mnemonicParsing="false" text="Add to Order" />
+                  <TextField fx:id="tf_donutSub" editable="false" />
+                  <Button fx:id="b_addDonutOrder" mnemonicParsing="false" text="Add to Order" />
                </children>
             </HBox>
          </children>

@@ -2,8 +2,10 @@ package com.example.rucafe.project4sm;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,7 +17,8 @@ public class CoffeeController {
     private List<CheckBox> selectedCheckboxes = new ArrayList<>();
     @FXML private ComboBox<Integer> num_coffee;
     @FXML private ComboBox<String> coffee_size;
-
+    @FXML private TextField coffee_subtotal;
+    @FXML private Button coffee_add;
     @FXML private CheckBox cb_SC;
     @FXML private CheckBox cb_FV;
     @FXML private CheckBox cb_IC;
