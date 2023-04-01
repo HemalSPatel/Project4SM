@@ -107,7 +107,7 @@ public class DonutController {
                 }
 
                 subtotal += selectedNum * price;
-                lv_donutpicked.getItems().add(selectedItem + "(" + selectedNum + ")");
+                lv_donutpicked.getItems().add(selectedItem + " (" + selectedNum + ")");
                 tf_donutSub.setText("$" + df.format(subtotal));
             }
         });
