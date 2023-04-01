@@ -14,6 +14,7 @@ import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class DonutController {
     ObservableList<String> yeastf = FXCollections.observableArrayList("Jelly", "Glazed", "Chocolate Frost", "Strawberry Frost", "Powdered", "Maple Frost");
@@ -133,10 +134,14 @@ public void initialize() {
     donutFlavors.put("Cake", cakef);
     donutFlavors.put("Donut Holes", holef);
 
+    //
+
     combo_donut_type.setOnAction(event -> {
         String selectedDonut = combo_donut_type.getValue();
         if (selectedDonut != null) {
             lv_donutflavor.setItems(donutFlavors.get(selectedDonut));
+            Image newImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/rucafe/project4sm/images/" + selectedDonut + ".png")));
+            image_donut.setImage(newImage);
         }
     });
 
