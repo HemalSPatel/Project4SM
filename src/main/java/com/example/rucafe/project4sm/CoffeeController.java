@@ -2,10 +2,7 @@ package com.example.rucafe.project4sm;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -41,10 +38,15 @@ public class CoffeeController {
         cb_Mocha.setOnAction(e -> handleCheckboxSelection(cb_Mocha));
         cb_Caramel.setOnAction(e -> handleCheckboxSelection(cb_Caramel));
 
-        coffee_add.setOnAction(e -> handleCoffeeAdd());
+        coffee_add.setOnAction(event -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Your order has been placed.");
+            alert.showAndWait();
+        });
 
         num_coffee.setOnAction(e -> updateSubtotal());
         coffee_size.setOnAction(e -> updateSubtotal());
+
+
     }
 
     private void handleCheckboxSelection(CheckBox checkbox) {
