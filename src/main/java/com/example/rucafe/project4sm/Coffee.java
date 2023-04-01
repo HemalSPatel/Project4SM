@@ -6,12 +6,21 @@ public class Coffee extends MenuItem {
     private String cupSize;
     private ArrayList<String> addIns;
 
+    /**
+     * constructor for a coffee object
+     * @param cupSize
+     */
     public Coffee(String cupSize) {
         super(cupSize + " coffee", calculatePrice(cupSize));
         this.cupSize = cupSize;
         this.addIns = new ArrayList<>();
     }
 
+    /**
+     * calculates the price of the coffee based on size
+     * @param cupSize
+     * @return price of coffee
+     */
     private static double calculatePrice(String cupSize) {
         switch (cupSize) {
             case "Short":
@@ -27,20 +36,36 @@ public class Coffee extends MenuItem {
         }
     }
 
+    /**
+     * Adds additional adsd ins to the arraylist and updates the price of the coffee
+     * @param addIn
+     */
     public void addAddIn(String addIn) {
         addIns.add(addIn);
         setPrice(getPrice() + 0.3);
     }
 
+    /**
+     * overrides the abstract method and returns the price of the item
+     * @return
+     */
     @Override
     public double itemPrice() {
         return getPrice();
     }
 
+    /**
+     * getter method for private instance variable cub size
+     * @return the cup size
+     */
     public String getCupSize() {
         return cupSize;
     }
 
+    /**
+     * getter method for the private instance variable add-ins
+     * @return list of add-ins in that specific coffee
+     */
     public ArrayList<String> getAddIns() {
         return addIns;
     }

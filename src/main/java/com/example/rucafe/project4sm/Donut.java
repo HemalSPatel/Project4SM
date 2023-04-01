@@ -4,12 +4,22 @@ public class Donut extends MenuItem {
     private String type;
     private String flavor;
 
+    /**
+     * constructor for a donut object
+     * @param type
+     * @param flavor
+     */
     public Donut(String type, String flavor) {
         super(flavor + " " + type + " donut", calculatePrice(type));
         this.type = type;
         this.flavor = flavor;
     }
 
+    /**
+     * calculates the price for the donut depending on its type
+     * @param type
+     * @return price of type of donut
+     */
     private static double calculatePrice(String type) {
         switch (type) {
             case "yeast":
@@ -23,15 +33,27 @@ public class Donut extends MenuItem {
         }
     }
 
+    /**
+     * overrides the abstract method to return the price of the donut
+     * @return price of donut
+     */
     @Override
     public double itemPrice() {
         return getPrice();
     }
 
+    /**
+     * getter method for the type of donut
+     * @return string for the type of donut
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     * getter method for the donut flavor
+     * @return the flavor of the donut
+     */
     public String getFlavor() {
         return flavor;
     }
