@@ -3,15 +3,17 @@ package com.example.rucafe.project4sm;
 public abstract class MenuItem {
     private String itemName;
     private double price;
+    private int amount;
 
     /**
      * Constructor for a menu item
      * @param itemName
      * @param price
      */
-    public MenuItem(String itemName, double price) {
+    public MenuItem(String itemName, double price, int amount) {
         this.itemName = itemName;
         this.price = price;
+        this.amount = amount;
     }
 
     /**
@@ -51,4 +53,8 @@ public abstract class MenuItem {
      * @return price of the item from the subclass
      */
     public abstract double itemPrice();
+
+    public int getAmount(){
+        return amount;
+    }
 }

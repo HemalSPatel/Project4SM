@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="458.0" prefWidth="511.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rucafe.project4sm.BasketController">
    <top>
       <HBox prefHeight="100.0" prefWidth="200.0" spacing="50.0" BorderPane.alignment="CENTER">
@@ -37,9 +36,9 @@
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                      <children>
-                        <TextField editable="false" />
-                        <TextField editable="false" />
-                        <TextField editable="false" />
+                        <TextField fx:id="tf_sub" editable="false" />
+                        <TextField fx:id="tf_tax" editable="false" />
+                        <TextField fx:id="tf_total" editable="false" />
                      </children>
                      <padding>
                         <Insets top="5.0" />
@@ -51,13 +50,13 @@
       </HBox>
    </top>
    <center>
-      <ListView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <ListView fx:id="lv_order" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
    <bottom>
       <HBox prefHeight="100.0" prefWidth="200.0" spacing="50.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" text="Remove Selected Item" />
-            <Button mnemonicParsing="false" text="Place Order" />
+            <Button fx:id="b_remove" mnemonicParsing="false" text="Remove Selected Item" />
+            <Button fx:id="b_place" mnemonicParsing="false" text="Place Order" />
          </children>
          <padding>
             <Insets left="100.0" top="35.0" />

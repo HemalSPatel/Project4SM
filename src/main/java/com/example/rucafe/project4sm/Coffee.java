@@ -10,8 +10,8 @@ public class Coffee extends MenuItem {
      * constructor for a coffee object
      * @param cupSize
      */
-    public Coffee(String cupSize) {
-        super(cupSize + " coffee", calculatePrice(cupSize));
+    public Coffee(String cupSize, int amount) {
+        super(cupSize + " coffee", calculatePrice(cupSize), amount);
         this.cupSize = cupSize;
         this.addIns = new ArrayList<>();
     }

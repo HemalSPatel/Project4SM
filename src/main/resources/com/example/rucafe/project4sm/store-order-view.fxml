@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="com.example.rucafe.project4sm.StoreController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rucafe.project4sm.StoreController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="413.0" minWidth="10.0" prefWidth="411.0" />
@@ -37,13 +37,13 @@
       </BorderPane>
       <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
          <children>
-            <ComboBox prefWidth="150.0" />
+            <ComboBox fx:id="cb_ordernum" prefWidth="150.0" />
             <Label text="Total Amount:">
                <VBox.margin>
                   <Insets top="25.0" />
                </VBox.margin>
             </Label>
-            <TextField />
+            <TextField fx:id="tf_total" />
          </children>
          <GridPane.margin>
             <Insets left="5.0" right="5.0" top="15.0" />
@@ -51,13 +51,13 @@
       </VBox>
       <HBox prefHeight="100.0" prefWidth="200.0" spacing="25.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <children>
-            <Button mnemonicParsing="false" text="Cancel Selected Order" />
-            <Button mnemonicParsing="false" text="Export Orders" />
+            <Button fx:id="b_cancel" mnemonicParsing="false" text="Cancel Selected Order" />
+            <Button fx:id="b_export" mnemonicParsing="false" text="Export Orders" />
          </children>
          <GridPane.margin>
             <Insets left="30.0" top="25.0" />
          </GridPane.margin>
       </HBox>
-      <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <ListView fx:id="lv_orders" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
    </children>
 </GridPane>

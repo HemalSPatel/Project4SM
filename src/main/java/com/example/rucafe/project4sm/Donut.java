@@ -9,11 +9,12 @@ public class Donut extends MenuItem {
      * @param type
      * @param flavor
      */
-    public Donut(String type, String flavor) {
-        super(flavor + " " + type + " donut", calculatePrice(type));
+    public Donut(String type, String flavor, int amount) {
+        super(flavor + " " + type + " donut", calculatePrice(type), amount);
         this.type = type;
         this.flavor = flavor;
     }
+
 
     /**
      * calculates the price for the donut depending on its type
@@ -22,11 +23,11 @@ public class Donut extends MenuItem {
      */
     private static double calculatePrice(String type) {
         switch (type) {
-            case "yeast":
+            case "Yeast":
                 return 1.59;
-            case "cake":
+            case "Cake":
                 return 1.79;
-            case "hole":
+            case "Donut Holes":
                 return 0.39;
             default:
                 return 0.0;
@@ -56,5 +57,9 @@ public class Donut extends MenuItem {
      */
     public String getFlavor() {
         return flavor;
+    }
+
+    public String toString(){
+        return getItemName() + " " + getFlavor() + " (" + getAmount() + ")";
     }
 }
