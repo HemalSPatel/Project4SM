@@ -2,13 +2,18 @@ package com.example.rucafe.project4sm;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javafx.scene.layout.BorderPane;
+import java.io.IOException;
 
 public class CoffeeController {
     private final int MAX_SELECTIONS = 2;
@@ -47,6 +52,14 @@ public class CoffeeController {
             }else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Your order has been placed.");
                 alert.showAndWait();
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("coffee-view.fxml"));
+                    BorderPane roots = (BorderPane) loader.load();
+                    BasketController basketcontroller = loader.getController();
+                    basketcontroller.setCoffeeController(this);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 

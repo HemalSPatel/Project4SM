@@ -19,21 +19,42 @@ public class BasketController {
     @FXML private Button b_place;
 
     private DonutController donutController;
+    private CoffeeController coffeeController;
     public void setDonutController(DonutController Controller) {
         donutController = Controller;
     }
 
+    public void setCoffeeController(CoffeeController Controller) {
+        coffeeController = Controller;
+    }
+
+    private void calculateSubTotal(ArrayList<MenuItem> order){
+        DecimalFormat df = new DecimalFormat("#.00");
+        Double subtotal = 0.0;
+        for(MenuItem e: order){
+            subtotal += (e.getPrice() * e.getAmount());
+        }
+        tf_sub.setText("$" + df.format(subtotal));
+        tf_tax.setText("6.25%");
+        tf_total.setText("$" + df.format(subtotal * 1.0625));
+    }
+
     public void initialize() {
 
+        //updates list for the order and prints it out
         ArrayList<MenuItem> order = new ArrayList<MenuItem>();
         order.addAll(DonutController.getDonutOrder());
 
         for(MenuItem e: order){
             lv_order.getItems().add(e.toString());
         }
+        calculateSubTotal(order);
 
         b_remove.setOnAction(event -> {
-
+            int selectedID = lv_order.getSelectionModel().getSelectedIndex();
+            order.remove(selectedID);
+            lv_order.getItems().remove(selectedID);
+            calculateSubTotal(order);
         });
 
         b_place.setOnAction(event -> {

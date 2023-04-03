@@ -60,6 +60,6 @@ public class Donut extends MenuItem {
     }
 
     public String toString(){
-        return getItemName() + " " + getFlavor() + " (" + getAmount() + ")";
+        return getItemName() + " (" + getAmount() + ")";
     }
 }
