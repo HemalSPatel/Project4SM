@@ -3,15 +3,17 @@ package com.example.rucafe.project4sm;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import javafx.stage.Stage;
+import javafx.scene.layout.BorderPane;
+import java.io.IOException;
+
 import java.text.DecimalFormat;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class DonutController {
     ObservableList<String> yeastf = FXCollections.observableArrayList("Jelly", "Glazed", "Chocolate Frost", "Strawberry Frost", "Powdered", "Maple Frost");
@@ -28,6 +30,23 @@ public class DonutController {
     @FXML private Button b_donutadd;
     @FXML private Button b_donutremove;
     @FXML private ImageView image_donut;
+
+    private static ArrayList<Donut> donutOrder = new ArrayList<Donut>();
+
+    public static ArrayList<Donut> getDonutOrder(){
+        return donutOrder;
+    }
+
+
+    private Donut findDonut(String flavor){
+        for(Donut e : donutOrder){
+            if(e.getFlavor().equalsIgnoreCase(flavor)){
+                return e;
+            }
+        }
+        return null;
+    }
+
 //    public void initialize() {
 //        combo_donut_type.setItems (FXCollections.observableArrayList("Yeast","Cake", "Donut Holes"));
 //        combo_donut_num.setItems (FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12));
@@ -149,25 +168,23 @@ public void initialize() {
         if (selectedItem != null) {
             String selectedDonut = combo_donut_type.getValue();
             ObservableList<String> flavors = null;
-            double price = 0.0;
-            switch (selectedDonut) {
+            Donut addedDonut = new Donut(selectedDonut, selectedItem,selectedNum);
+            donutOrder.add(addedDonut);
+            switch (addedDonut.getType()) {
                 case "Yeast":
                     flavors = FXCollections.observableArrayList(yeastf);
-                    price = 1.59;
                     break;
                 case "Cake":
                     flavors = FXCollections.observableArrayList(cakef);
-                    price = 1.79;
                     break;
                 case "Donut Holes":
                     flavors = FXCollections.observableArrayList(holef);
-                    price = 0.39;
                     break;
             }
             flavors.remove(selectedItem);
             lv_donutflavor.setItems(flavors);
             lv_donutpicked.getItems().add(selectedItem + " (" + selectedNum + ")");
-            subtotal += selectedNum * price;
+            subtotal += addedDonut.getAmount() * addedDonut.itemPrice();
             tf_donutSub.setText("$" + df.format(subtotal));
         }
     });
@@ -177,37 +194,25 @@ public void initialize() {
         String selectedItem = lv_donutpicked.getSelectionModel().getSelectedItem();
         if(selectedItem != null) {
             lv_donutpicked.getItems().remove(selectedItem);
-            String selectedDonut = combo_donut_type.getValue();
             String donutFlavor = selectedItem.substring(0, selectedItem.lastIndexOf("(") - 1);
+            Donut removing = findDonut(donutFlavor);
+            String selectedDonut = removing.getType();
 
-            if (selectedDonut.equals("Yeast")) {
+            if (selectedDonut.equalsIgnoreCase("Yeast")) {
                 yeastf.add(donutFlavor);
-            } else if (selectedDonut.equals("Cake")) {
+            } else if (selectedDonut.equalsIgnoreCase("Cake")) {
                 cakef.add(donutFlavor);
-            } else if (selectedDonut.equals("Donut Holes")) {
+            } else if (selectedDonut.equalsIgnoreCase("Donut Holes")) {
                 holef.add(donutFlavor);
             }
 
             if (selectedDonut.equals(combo_donut_type.getValue())) {
                 lv_donutflavor.getItems().add(donutFlavor);
             }
-
-            double price = 0.0;
-            switch(selectedDonut) {
-                case "Yeast":
-                    price = 1.59;
-                    break;
-                case "Cake":
-                    price = 1.79;
-                    break;
-                case "Donut Holes":
-                    price = 0.39;
-                    break;
-            }
-
             int quantity = Integer.parseInt(selectedItem.substring(selectedItem.lastIndexOf("(") + 1, selectedItem.lastIndexOf(")")));
-            subtotal -= quantity * price;
+            subtotal -= quantity * removing.getPrice();
             tf_donutSub.setText("$" + df.format(subtotal));
+            donutOrder.remove(removing);
         }
     });
 
@@ -218,6 +223,16 @@ public void initialize() {
         }else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Your order has been placed.");
             alert.showAndWait();
+
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("basket-view.fxml"));
+                BorderPane root = (BorderPane) loader.load();
+                BasketController basketcontroller = loader.getController();
+                basketcontroller.setDonutController(this);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
         }
     });
 
