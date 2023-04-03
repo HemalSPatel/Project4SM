@@ -3,10 +3,7 @@ package com.example.rucafe.project4sm;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -134,7 +131,6 @@ public void initialize() {
     donutFlavors.put("Cake", cakef);
     donutFlavors.put("Donut Holes", holef);
 
-    //
 
     combo_donut_type.setOnAction(event -> {
         String selectedDonut = combo_donut_type.getValue();
@@ -212,6 +208,16 @@ public void initialize() {
             int quantity = Integer.parseInt(selectedItem.substring(selectedItem.lastIndexOf("(") + 1, selectedItem.lastIndexOf(")")));
             subtotal -= quantity * price;
             tf_donutSub.setText("$" + df.format(subtotal));
+        }
+    });
+
+    b_addDonutOrder.setOnAction(event -> {
+        if (subtotal <= 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Your order has not been placed.");
+            alert.showAndWait();
+        }else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Your order has been placed.");
+            alert.showAndWait();
         }
     });
 

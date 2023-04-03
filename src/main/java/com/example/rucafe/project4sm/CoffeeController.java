@@ -13,6 +13,8 @@ import java.util.List;
 public class CoffeeController {
     private final int MAX_SELECTIONS = 2;
     private int numSelections = 0;
+    double subtotal =0;
+
     private List<CheckBox> selectedCheckboxes = new ArrayList<>();
     @FXML private ComboBox<Integer> num_coffee;
     @FXML private ComboBox<String> coffee_size;
@@ -39,8 +41,13 @@ public class CoffeeController {
         cb_Caramel.setOnAction(e -> handleCheckboxSelection(cb_Caramel));
 
         coffee_add.setOnAction(event -> {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Your order has been placed.");
-            alert.showAndWait();
+            if (subtotal <= 0) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Your order has not been placed.");
+                alert.showAndWait();
+            }else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Your order has been placed.");
+                alert.showAndWait();
+            }
         });
 
         num_coffee.setOnAction(e -> updateSubtotal());
@@ -90,7 +97,7 @@ public class CoffeeController {
         }
 
         double addInPriceTotal = selectedCheckboxes.size() * addInPrice;
-        double subtotal = (basePrice + sizePrice + addInPriceTotal) * numCups;
+        subtotal = (basePrice + sizePrice + addInPriceTotal) * numCups;
         coffee_subtotal.setText(String.format("%.2f", subtotal));
     }
 }
