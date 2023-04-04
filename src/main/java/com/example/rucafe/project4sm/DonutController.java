@@ -37,6 +37,12 @@ public class DonutController {
         return donutOrder;
     }
 
+    public static void resetOrderDonut(){
+        if(donutOrder != null){
+            donutOrder.clear();
+        }
+    }
+
 
     private Donut findDonut(String flavor){
         for(Donut e : donutOrder){

@@ -41,6 +41,12 @@ public class BasketController {
         return order;
     }
 
+    public static void resetOrder(){
+        if(order != null){
+            order.clear();
+        }
+    }
+
     private void calculateSubTotal(ArrayList<MenuItem> order){
         DecimalFormat df = new DecimalFormat("#.00");
         Double subtotal = 0.0;
