@@ -69,5 +69,18 @@ public class Coffee extends MenuItem {
     public ArrayList<String> getAddIns() {
         return addIns;
     }
+
+    public String toString(){
+        String end = "";
+        end += getItemName() + " ";
+        if(getAddIns().size() != 0){
+            end += "[";
+            for(String e : getAddIns()){
+                end += e + " ";
+            }
+            end += "]";
+        }
+        return end;
+    }
 }
 

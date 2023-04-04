@@ -20,7 +20,7 @@ public class CoffeeController {
     private int numSelections = 0;
     double subtotal =0;
 
-    private List<CheckBox> selectedCheckboxes = new ArrayList<>();
+    private ArrayList<CheckBox> selectedCheckboxes = new ArrayList<>();
     @FXML private ComboBox<Integer> num_coffee;
     @FXML private ComboBox<String> coffee_size;
     @FXML private TextField coffee_subtotal;
@@ -34,6 +34,12 @@ public class CoffeeController {
     private double basePrice = 1.89;
     private double sizePriceIncrement = 0.4;
     private double addInPrice = 0.3;
+
+    private static Coffee addedCoffee;
+
+    public static Coffee getAddedCoffee(){
+        return addedCoffee;
+    }
 
     public void initialize() {
         num_coffee.setItems(FXCollections.observableArrayList(1, 2, 3, 4, 5));
@@ -52,13 +58,20 @@ public class CoffeeController {
             }else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Your order has been placed.");
                 alert.showAndWait();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("basket-view.fxml"));
                 try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("coffee-view.fxml"));
-                    BorderPane roots = (BorderPane) loader.load();
-                    BasketController basketcontroller = loader.getController();
-                    basketcontroller.setCoffeeController(this);
+                    BorderPane root = (BorderPane) loader.load();
                 } catch (IOException e) {
-                    throw new RuntimeException(e);
+                }
+                BasketController basketcontroller = loader.getController();
+                try {
+                    basketcontroller.setCoffeeController(this);
+                } catch (NullPointerException n){
+                };
+
+                addedCoffee = new Coffee(coffee_size.getValue(), num_coffee.getValue());
+                for(CheckBox e: selectedCheckboxes){
+                    addedCoffee.addAddIn(e.getText());
                 }
             }
         });
@@ -108,7 +121,6 @@ public class CoffeeController {
                     break;
             }
         }
-
         double addInPriceTotal = selectedCheckboxes.size() * addInPrice;
         subtotal = (basePrice + sizePrice + addInPriceTotal) * numCups;
         coffee_subtotal.setText(String.format("%.2f", subtotal));

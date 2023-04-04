@@ -11,9 +11,9 @@ public class Order {
      * constructor for an order object
      * @param orderNumber
      */
-    public Order(int orderNumber) {
+    public Order(int orderNumber, ArrayList<MenuItem> item) {
         this.orderNumber = orderNumber;
-        this.items = new ArrayList<>();
+        this.items = item;
     }
 
     /**
