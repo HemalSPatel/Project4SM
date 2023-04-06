@@ -35,6 +35,7 @@ public class StoreController {
      *
      */
     public void initialize() {
+        DecimalFormat df = new DecimalFormat("#.00");
         /**
          *
          */
@@ -47,6 +48,7 @@ public class StoreController {
                 for(int i = 0; i < controller.getStoreOrders().getStoreOrders().size(); i ++){
                     cb_ordernum.getItems().add(i+1);
                 }
+                tf_total.setText("$" + df.format(0));
             }
         });
 
@@ -55,7 +57,6 @@ public class StoreController {
          */
         b_export.setOnAction(event -> {
             ArrayList<Order> allOrders = controller.getStoreOrders().getStoreOrders();
-            DecimalFormat df = new DecimalFormat("#.00");
             if(allOrders.size() > 0 ){
                 try{
                     File file = new File("Orders.txt");
@@ -86,7 +87,6 @@ public class StoreController {
          */
         cb_ordernum.setOnAction(event ->{
             Order selected;
-            DecimalFormat df = new DecimalFormat("#.00");
             if(cb_ordernum.getItems().size() > 0 || cb_ordernum.getValue() != null){
                 DecimalFormat d = new DecimalFormat("'$'0.00");
                 if(!lv_storeorders.getItems().isEmpty()) lv_storeorders.getItems().clear();
