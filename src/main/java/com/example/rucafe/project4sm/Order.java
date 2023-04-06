@@ -5,15 +5,15 @@ import java.util.ArrayList;
 public class Order {
 
     private int orderNumber;
-    private ArrayList<MenuItem> items;
+    private ArrayList<MenuItem> order;
 
     /**
      * constructor for an order object
-     * @param orderNumber
+     *
+     * @param
      */
-    public Order(int orderNumber, ArrayList<MenuItem> item) {
-        this.orderNumber = orderNumber;
-        this.items = item;
+    public Order() {
+        order = new ArrayList<MenuItem>();;
     }
 
     /**
@@ -21,7 +21,7 @@ public class Order {
      * @param item
      */
     public void addItem(MenuItem item) {
-        items.add(item);
+        order.add(item);
     }
 
     /**
@@ -29,7 +29,7 @@ public class Order {
      * @param item
      */
     public void removeItem(MenuItem item) {
-        items.remove(item);
+        order.remove(item);
     }
 
     /**
@@ -38,7 +38,7 @@ public class Order {
      */
     public double getOrderTotal() {
         double total = 0.0;
-        for (MenuItem item : items) {
+        for (MenuItem item : order) {
             total += item.itemPrice();
         }
         return total;
@@ -57,7 +57,35 @@ public class Order {
      * @return an array list of all the menu items
      */
     public ArrayList<MenuItem> getItems() {
-        return items;
+        return order;
     }
+
+
+
+    //--------------------
+
+
+    public boolean add(Object obj) {
+        if(obj instanceof MenuItem){
+            MenuItem mi = (MenuItem) obj;
+            order.add(mi);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean remove(Object obj){
+        if(obj instanceof MenuItem){
+            MenuItem mi = (MenuItem) obj;
+            order.remove(mi);
+            return true;
+        }
+        return false;
+    }
+
+    public ArrayList<MenuItem> getOrder() {
+        return order;
+    }
+
 
 }

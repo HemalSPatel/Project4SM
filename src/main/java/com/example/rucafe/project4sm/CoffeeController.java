@@ -35,10 +35,27 @@ public class CoffeeController {
     private double sizePriceIncrement = 0.4;
     private double addInPrice = 0.3;
 
-    private static Coffee addedCoffee;
+    private static ArrayList<Coffee> addedCoffee = new ArrayList<Coffee>();
+    private static Coffee currentCoffee;
 
-    public static Coffee getAddedCoffee(){
+    private RUCafeController controller;
+
+    /**
+     * Sets the main controller for this controller.
+     * @param controller main controller.
+     */
+    public void setMainController(RUCafeController controller){
+        this.controller = controller;
+    }
+
+    public static ArrayList<Coffee> getAddedCoffee(){
         return addedCoffee;
+    }
+
+    public static void resetOrderCoffee(){
+        if(addedCoffee != null){
+            addedCoffee.clear();
+        }
     }
 
     public void initialize() {
@@ -58,6 +75,7 @@ public class CoffeeController {
             }else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Your order has been placed.");
                 alert.showAndWait();
+
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("basket-view.fxml"));
                 try {
                     BorderPane root = (BorderPane) loader.load();
@@ -69,10 +87,13 @@ public class CoffeeController {
                 } catch (NullPointerException n){
                 };
 
-                addedCoffee = new Coffee(coffee_size.getValue(), num_coffee.getValue());
+                currentCoffee = new Coffee(coffee_size.getValue(), num_coffee.getValue());
                 for(CheckBox e: selectedCheckboxes){
-                    addedCoffee.addAddIn(e.getText());
+                    currentCoffee.addAddIn(e.getText());
                 }
+                addedCoffee.add(currentCoffee);
+                controller.addToOrder(currentCoffee);
+
             }
         });
 

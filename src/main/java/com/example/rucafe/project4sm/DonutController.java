@@ -20,6 +20,7 @@ public class DonutController {
     ObservableList<String> cakef = FXCollections.observableArrayList("Old Fashion", "Cinnamon Sugar", "Blueberry");
     ObservableList<String> holef = FXCollections.observableArrayList("Sugar Coat", "Chocolate", "Butternut");
     private double subtotal = 0.0;
+    DecimalFormat df = new DecimalFormat("#.00");
     //List<String> yeastflavor = ;
     @FXML private ComboBox<String> combo_donut_type;
     @FXML private ComboBox<Integer> combo_donut_num;
@@ -30,6 +31,15 @@ public class DonutController {
     @FXML private Button b_donutadd;
     @FXML private Button b_donutremove;
     @FXML private ImageView image_donut;
+    private RUCafeController controller;
+
+    /**
+     * Sets the main controller for this controller.
+     * @param controller main controller.
+     */
+    public void setMainController(RUCafeController controller){
+        this.controller = controller;
+    }
 
     private static ArrayList<Donut> donutOrder = new ArrayList<Donut>();
 
@@ -71,8 +81,6 @@ public class DonutController {
                 image_donut.setImage(newImage);
             }
         });
-
-        DecimalFormat df = new DecimalFormat("#.00");
 
         b_donutadd.setOnAction(event -> {
             String selectedItem = lv_donutflavor.getSelectionModel().getSelectedItem();
@@ -148,7 +156,11 @@ public class DonutController {
             }else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Your order has been placed.");
                 alert.showAndWait();
-
+                for(int i = 0; i < donutOrder.size(); i++){
+                    controller.addToOrder(donutOrder.get(i));
+                }
+                donutOrder.clear();
+                lv_donutpicked.getItems().removeAll(lv_donutpicked.getItems());
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("basket-view.fxml"));
                     BorderPane root = (BorderPane) loader.load();

@@ -21,15 +21,25 @@ public class StoreController {
     @FXML
     private ComboBox<Integer> cb_ordernum;
     @FXML
-    private ListView<String> lv_orders;
+    private ListView<MenuItem> lv_storeorders;
     @FXML
     private TextField tf_total;
     private BasketController basketController;
+
+    private RUCafeController controller;
+
+    /**
+     * Sets the main controller for this controller.
+     * @param controller main controller.
+     */
+    public void setMainController(RUCafeController controller){
+        this.controller = controller;
+    }
     public void setBasketController(BasketController Controller) {
         basketController = Controller;
     }
 
-    private ArrayList<Order> allOrders;
+    public static ArrayList<Order> allOrders;
     private static int orderNum = 0;
 
     private void resetCombo(ArrayList<Order> allOrders){
@@ -42,15 +52,21 @@ public class StoreController {
     }
 
     public void initialize() {
-        allOrders = new ArrayList<>();
-        Order currentOrder = new Order(orderNum++, basketController.getOrder());
-        basketController.resetOrder();
-        allOrders.add(currentOrder);
-        resetCombo(allOrders);
+        //allOrders = new ArrayList<Order>();
+        //Order currentOrder = new Order(basketController.getOrder());
+        //basketController.resetOrder();
+        //allOrders.add(currentOrder);
+        //lv_orders.getItems().addAll(currentOrder);
+        try {
+            resetCombo(allOrders);
+        }catch (Exception e) {
+
+        }
+
 
         b_cancel.setOnAction(event -> {
             int selectedNum = (int) cb_ordernum.getValue();
-            lv_orders.getItems().clear();
+            lv_storeorders.getItems().clear();
             allOrders.remove(selectedNum-1);
             resetCombo(allOrders);
             tf_total.setText("$0.00");
@@ -80,21 +96,31 @@ public class StoreController {
         });
 
         cb_ordernum.setOnAction(event ->{
-            int selectedNum = (int) cb_ordernum.getValue();
-            DecimalFormat df = new DecimalFormat("#.00");
-            ArrayList<MenuItem> cur = allOrders.get(selectedNum - 1).getItems();
-            double total = 0;
-            if (selectedNum != 0) {
-                for(MenuItem w : cur){
-                    if(w != null){
-                        total += (w.getAmount()* w.itemPrice());
-                        lv_orders.getItems().add(w.toString());
-                    }
-                }
-                tf_total.setText("$" + df.format(total));
+//            int selectedNum = (int) cb_ordernum.getValue();
+//            DecimalFormat df = new DecimalFormat("#.00");
+//            ArrayList<MenuItem> cur = allOrders.get(selectedNum - 1).getItems();
+//            double total = 0;
+//            if (selectedNum != 0) {
+//                for(MenuItem w : cur){
+//                    if(w != null){
+//                        total += (w.getAmount()* w.itemPrice());
+//                        lv_orders.getItems().add(w.toString());
+//                    }
+//                }
+//                tf_total.setText("$" + df.format(total));
+//            }
+            if(cb_ordernum.getItems().size() > 0 || cb_ordernum.getValue() != null){
+                DecimalFormat d = new DecimalFormat("'$'0.00");
+                if(!lv_storeorders.getItems().isEmpty()) lv_storeorders.getItems().clear();
+                lv_storeorders.getItems().addAll(controller.getStoreOrders().getStoreOrders().get(cb_ordernum.getValue()-1).getOrder());
+                //total.setText(""+ d.format(controller.getStoreOrders().getStoreOrders().get(cb_ordernum.getValue()-1).getTotal()));
             }
         });
 
 
+    }
+
+    public ComboBox<Integer> getOrderNumber() {
+        return cb_ordernum;
     }
 }

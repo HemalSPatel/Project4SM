@@ -1,20 +1,14 @@
 package com.example.rucafe.project4sm;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 
-import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.*;
 
 public class BasketController {
-    @FXML private ListView<String> lv_order;
+    @FXML private ListView<MenuItem> lv_order;
     @FXML private TextField tf_sub;
     @FXML private TextField tf_tax;
     @FXML private TextField tf_total;
@@ -24,6 +18,9 @@ public class BasketController {
     private DonutController donutController;
     private CoffeeController coffeeController;
 
+    private StoreOrder storeOrders;
+
+    private static int orderNum = 0;
 
     public void setDonutController(DonutController controller) {
         donutController = controller;
@@ -36,6 +33,15 @@ public class BasketController {
         coffeeController = controller;
     }
 
+    private RUCafeController controller;
+
+    /**
+     * Sets the main controller for this controller.
+     * @param controller main controller.
+     */
+    public void setMainController(RUCafeController controller){
+        this.controller = controller;
+    }
 
     public static ArrayList<MenuItem> getOrder(){
         return order;
@@ -56,7 +62,7 @@ public class BasketController {
             }
         }
         tf_sub.setText("$" + df.format(subtotal));
-        tf_tax.setText("6.25%");
+        tf_tax.setText("$" + df.format(subtotal * .0625));
         tf_total.setText("$" + df.format(subtotal * 1.0625));
     }
 
@@ -66,14 +72,13 @@ public class BasketController {
 
         order = new ArrayList<MenuItem>();
 
-        order.addAll(donutController.getDonutOrder());
-        Coffee addedCoffee = coffeeController.getAddedCoffee();
-        order.add(addedCoffee);
+        //order.addAll(donutController.getDonutOrder());
+        //order.addAll(coffeeController.getAddedCoffee());
 
 
             for(MenuItem e: order){
                 if(e != null){
-                    lv_order.getItems().add(e.toString());
+                    lv_order.getItems().add(e);
                 }
             }
             calculateSubTotal(order);
@@ -82,18 +87,36 @@ public class BasketController {
 
         b_remove.setOnAction(event -> {
             int selectedID = lv_order.getSelectionModel().getSelectedIndex();
-            order.remove(selectedID);
-            lv_order.getItems().remove(selectedID);
+//            order.remove(selectedID);
+//            lv_order.getItems().remove(selectedID);
+            MenuItem removeMI = lv_order.getSelectionModel().getSelectedItem();
+            controller.removeFromOrder(removeMI);
+            lv_order.getItems().remove(lv_order.getSelectionModel().getSelectedItem());
             calculateSubTotal(order);
+
+//            if(order.get(selectedID) instanceof Coffee) {
+//                CoffeeController.getAddedCoffee().remove(order.get(selectedID));
+//            } else {
+//                DonutController.getDonutOrder().remove(order.get(selectedID));
+//            }
         });
 
         b_place.setOnAction(event -> {
-            if (order.size() == 0) {
+            if (controller.getCurrentOrder().getOrder().size() == 0) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "The basket is empty.");
                 alert.showAndWait();
             }else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Your order has been placed.");
                 alert.showAndWait();
+                lv_order.getItems().clear();
+                controller.addToStoreOrder();
+                //System.out.println(StoreController.allOrders.get(0));
+//                order.removeAll(donutController.getDonutOrder());
+//                order.removeAll(coffeeController.getAddedCoffee());
+                order.clear();
+                donutController.resetOrderDonut();
+                coffeeController.resetOrderCoffee();
+                calculateSubTotal(order);
 
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("store-order-view.fxml"));
@@ -107,5 +130,15 @@ public class BasketController {
         });
     }
 
+    public void addToStoreOrder() {
+        if (StoreController.allOrders == null) StoreController.allOrders = new ArrayList<Order>();
+        Order curOrder = new Order();
+        StoreController.allOrders.add(curOrder);
+        curOrder = null;
+    }
+
+    public ListView<MenuItem> getBasket() {
+        return lv_order;
+    }
 
 }
