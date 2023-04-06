@@ -6,9 +6,10 @@ public abstract class MenuItem {
     private int amount;
 
     /**
-     * Constructor for a menu item
+     *
      * @param itemName
      * @param price
+     * @param amount
      */
     public MenuItem(String itemName, double price, int amount) {
         this.itemName = itemName;
@@ -54,6 +55,10 @@ public abstract class MenuItem {
      */
     public abstract double itemPrice();
 
+    /**
+     *
+     * @return
+     */
     public int getAmount(){
         return amount;
     }

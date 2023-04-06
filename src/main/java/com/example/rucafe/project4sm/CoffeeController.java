@@ -2,18 +2,8 @@ package com.example.rucafe.project4sm;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
-
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import javafx.scene.layout.BorderPane;
-import java.io.IOException;
 
 public class CoffeeController {
     private final int MAX_SELECTIONS = 2;
@@ -48,16 +38,22 @@ public class CoffeeController {
         this.controller = controller;
     }
 
-    public static ArrayList<Coffee> getAddedCoffee(){
+/*    public static ArrayList<Coffee> getAddedCoffee(){
         return addedCoffee;
-    }
+    }*/
 
+    /**
+     *
+     */
     public static void resetOrderCoffee(){
         if(addedCoffee != null){
             addedCoffee.clear();
         }
     }
 
+    /**
+     *
+     */
     public void initialize() {
         num_coffee.setItems(FXCollections.observableArrayList(1, 2, 3, 4, 5));
         coffee_size.setItems(FXCollections.observableArrayList("Short", "Tall", "Grande", "Venti"));
@@ -68,6 +64,9 @@ public class CoffeeController {
         cb_Mocha.setOnAction(e -> handleCheckboxSelection(cb_Mocha));
         cb_Caramel.setOnAction(e -> handleCheckboxSelection(cb_Caramel));
 
+        /**
+         *
+         */
         coffee_add.setOnAction(event -> {
             if (subtotal <= 0) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Your order has not been placed.");
@@ -75,34 +74,22 @@ public class CoffeeController {
             }else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Your order has been placed.");
                 alert.showAndWait();
-
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("basket-view.fxml"));
-                try {
-                    BorderPane root = (BorderPane) loader.load();
-                } catch (IOException e) {
-                }
-                BasketController basketcontroller = loader.getController();
-                try {
-                    basketcontroller.setCoffeeController(this);
-                } catch (NullPointerException n){
-                };
-
                 currentCoffee = new Coffee(coffee_size.getValue(), num_coffee.getValue());
                 for(CheckBox e: selectedCheckboxes){
                     currentCoffee.addAddIn(e.getText());
                 }
                 addedCoffee.add(currentCoffee);
                 controller.addToOrder(currentCoffee);
-
             }
         });
-
         num_coffee.setOnAction(e -> updateSubtotal());
         coffee_size.setOnAction(e -> updateSubtotal());
-
-
     }
 
+    /**
+     *
+     * @param checkbox
+     */
     private void handleCheckboxSelection(CheckBox checkbox) {
         if (checkbox.isSelected()) {
             if (selectedCheckboxes.size() >= MAX_SELECTIONS) {
@@ -116,16 +103,18 @@ public class CoffeeController {
 
         updateSubtotal();
     }
-
+/*
     private void handleCoffeeAdd() {
         updateSubtotal();
-    }
+    }*/
 
+    /**
+     *
+     */
     private void updateSubtotal() {
         int numCups = num_coffee.getValue() == null ? 0 : num_coffee.getValue();
         String sizeStr = coffee_size.getValue();
         double sizePrice = 0.0;
-
         if (sizeStr != null) {
             switch (sizeStr) {
                 case "Tall":

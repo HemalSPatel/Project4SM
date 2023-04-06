@@ -7,8 +7,9 @@ public class Coffee extends MenuItem {
     private ArrayList<String> addIns;
 
     /**
-     * constructor for a coffee object
+     *
      * @param cupSize
+     * @param amount
      */
     public Coffee(String cupSize, int amount) {
         super(cupSize + " coffee", calculatePrice(cupSize), amount);
@@ -70,6 +71,10 @@ public class Coffee extends MenuItem {
         return addIns;
     }
 
+    /**
+     *
+     * @return
+     */
     public String toString(){
         String end = "";
         end += getItemName() + " ";
@@ -80,6 +85,7 @@ public class Coffee extends MenuItem {
             }
             end += "]";
         }
+        end += " (" + getAmount() + ")";
         return end;
     }
 }

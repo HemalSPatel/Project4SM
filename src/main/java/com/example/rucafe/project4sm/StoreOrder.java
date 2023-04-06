@@ -4,9 +4,17 @@ import java.util.ArrayList;
 
 
 public class StoreOrder {
+
+    /**
+     *
+     */
     private ArrayList<Order> storeOrders= new ArrayList<Order>();
 
-
+    /**
+     *
+     * @param obj
+     * @return
+     */
     public boolean add(Object obj) {
         if(obj instanceof Order){
             Order order = (Order) obj;
@@ -16,6 +24,11 @@ public class StoreOrder {
         return false;
     }
 
+    /**
+     *
+     * @param obj
+     * @return
+     */
     public boolean remove(Object obj){
         if(obj instanceof Order){
             Order order = (Order) obj;
@@ -25,6 +38,10 @@ public class StoreOrder {
         return false;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Order> getStoreOrders() {
         return storeOrders;
     }

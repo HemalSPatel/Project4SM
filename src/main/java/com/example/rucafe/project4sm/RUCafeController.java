@@ -23,7 +23,7 @@ public class RUCafeController {
     @FXML
     private Button store_order;
 
-    private Order currentOrder;
+    private Order currentOrder = new Order();
 
     private StoreOrder storeOrders;
 
@@ -89,11 +89,16 @@ public class RUCafeController {
         BasketController basketController = fxmlLoader.getController();
         basketController.setMainController(this);
 
+
         try {
             basketController.getBasket().getItems().addAll(currentOrder.getOrder());
         } catch (Exception e) {
 
         }
+        if(currentOrder != null){
+            basketController.calculateSubTotal();
+        }
+
 
         primaryStage.initModality (Modality.APPLICATION_MODAL);
         primaryStage.setScene(scene);

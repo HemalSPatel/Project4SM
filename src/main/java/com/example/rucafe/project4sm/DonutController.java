@@ -3,15 +3,9 @@ package com.example.rucafe.project4sm;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
-import javafx.stage.Stage;
-import javafx.scene.layout.BorderPane;
-import java.io.IOException;
-
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -21,7 +15,6 @@ public class DonutController {
     ObservableList<String> holef = FXCollections.observableArrayList("Sugar Coat", "Chocolate", "Butternut");
     private double subtotal = 0.0;
     DecimalFormat df = new DecimalFormat("#.00");
-    //List<String> yeastflavor = ;
     @FXML private ComboBox<String> combo_donut_type;
     @FXML private ComboBox<Integer> combo_donut_num;
     @FXML private ListView<String> lv_donutflavor;
@@ -41,19 +34,25 @@ public class DonutController {
         this.controller = controller;
     }
 
-    private static ArrayList<Donut> donutOrder = new ArrayList<Donut>();
+    /**
+     *
+     */
+    private ArrayList<Donut> donutOrder = new ArrayList<Donut>();
 
-    public static ArrayList<Donut> getDonutOrder(){
-        return donutOrder;
-    }
-
-    public static void resetOrderDonut(){
+    /**
+     *
+     */
+    public void resetOrderDonut(){
         if(donutOrder != null){
             donutOrder.clear();
         }
     }
 
-
+    /**
+     *
+     * @param flavor
+     * @return
+     */
     private Donut findDonut(String flavor){
         for(Donut e : donutOrder){
             if(e.getFlavor().equalsIgnoreCase(flavor)){
@@ -62,6 +61,10 @@ public class DonutController {
         }
         return null;
     }
+
+    /**
+     *
+     */
     public void initialize() {
         combo_donut_type.setItems(FXCollections.observableArrayList("Yeast", "Cake", "Donut Holes"));
         combo_donut_num.setItems(FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12));
@@ -72,7 +75,9 @@ public class DonutController {
         donutFlavors.put("Cake", cakef);
         donutFlavors.put("Donut Holes", holef);
 
-
+        /**
+         *
+         */
         combo_donut_type.setOnAction(event -> {
             String selectedDonut = combo_donut_type.getValue();
             if (selectedDonut != null) {
@@ -82,6 +87,9 @@ public class DonutController {
             }
         });
 
+        /**
+         *
+         */
         b_donutadd.setOnAction(event -> {
             String selectedItem = lv_donutflavor.getSelectionModel().getSelectedItem();
             Integer selectedNum = combo_donut_num.getSelectionModel().getSelectedItem();
@@ -122,7 +130,9 @@ public class DonutController {
             }
         });
 
-
+        /**
+         *
+         */
         b_donutremove.setOnAction(event -> {
             String selectedItem = lv_donutpicked.getSelectionModel().getSelectedItem();
             if(selectedItem != null) {
@@ -149,6 +159,9 @@ public class DonutController {
             }
         });
 
+        /**
+         *
+         */
         b_addDonutOrder.setOnAction(event -> {
             if (subtotal <= 0) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Your order has not been placed.");
@@ -160,22 +173,21 @@ public class DonutController {
                     controller.addToOrder(donutOrder.get(i));
                 }
                 donutOrder.clear();
+                tf_donutSub.setText("$0.00");
                 lv_donutpicked.getItems().removeAll(lv_donutpicked.getItems());
-                try {
+               /* try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("basket-view.fxml"));
                     BorderPane root = (BorderPane) loader.load();
                     BasketController basketcontroller = loader.getController();
                     basketcontroller.setDonutController(this);
-                } catch (IOException e) {
+                } catch (IOException e) {*/
                     //throw new RuntimeException(e);
                 }
 
-            }
+
         });
 
     }
-
-
 
 }
 

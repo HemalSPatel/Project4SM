@@ -5,9 +5,10 @@ public class Donut extends MenuItem {
     private String flavor;
 
     /**
-     * constructor for a donut object
+     *
      * @param type
      * @param flavor
+     * @param amount
      */
     public Donut(String type, String flavor, int amount) {
         super(flavor + " " + type + " donut", calculatePrice(type), amount);
@@ -59,6 +60,10 @@ public class Donut extends MenuItem {
         return flavor;
     }
 
+    /**
+     *
+     * @return
+     */
     public String toString(){
         return getItemName() + " (" + getAmount() + ")";
     }

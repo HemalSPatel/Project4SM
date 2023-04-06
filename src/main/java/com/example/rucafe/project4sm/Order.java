@@ -4,16 +4,15 @@ import java.util.ArrayList;
 
 public class Order {
 
-    private int orderNumber;
+    private double totalPrice;
     private ArrayList<MenuItem> order;
 
     /**
-     * constructor for an order object
      *
-     * @param
      */
     public Order() {
-        order = new ArrayList<MenuItem>();;
+        order = new ArrayList<MenuItem>();
+        totalPrice = 0;
     }
 
     /**
@@ -45,12 +44,13 @@ public class Order {
     }
 
     /**
-     * getter method for the private instance variable order number
-     * @return order number
+     *
+     * @param price
      */
-    public int getOrderNumber() {
-        return orderNumber;
+    public void setTotalPrice(double price){
+        this.totalPrice = price;
     }
+
 
     /**
      * getter method for all the items in the order
@@ -60,11 +60,19 @@ public class Order {
         return order;
     }
 
+    /**
+     *
+     * @return
+     */
+    public double getTotalPrice(){
+        return totalPrice;
+    }
 
-
-    //--------------------
-
-
+    /**
+     *
+     * @param obj
+     * @return
+     */
     public boolean add(Object obj) {
         if(obj instanceof MenuItem){
             MenuItem mi = (MenuItem) obj;
@@ -74,6 +82,11 @@ public class Order {
         return false;
     }
 
+    /**
+     *
+     * @param obj
+     * @return
+     */
     public boolean remove(Object obj){
         if(obj instanceof MenuItem){
             MenuItem mi = (MenuItem) obj;
@@ -83,6 +96,23 @@ public class Order {
         return false;
     }
 
+    /**
+     *
+     * @return
+     */
+    public String toString(){
+        String endString = "";
+        for(int i = 0; i < order.size(); i++){
+            endString += order.get(i).toString();
+            endString += "\n";
+        }
+        return endString;
+    }
+
+    /**
+     *
+     * @return
+     */
     public ArrayList<MenuItem> getOrder() {
         return order;
     }
