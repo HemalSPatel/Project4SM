@@ -37,12 +37,12 @@ public class DonutController {
     /**
      *
      */
-    private ArrayList<Donut> donutOrder = new ArrayList<Donut>();
+    private static ArrayList<Donut> donutOrder = new ArrayList<Donut>();
 
     /**
      *
      */
-    public void resetOrderDonut(){
+    public static void resetOrderDonut(){
         if(donutOrder != null){
             donutOrder.clear();
         }
