@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public class CoffeeController {
     private final int MAX_SELECTIONS = 2;
-    private int numSelections = 0;
     double subtotal =0;
 
     private ArrayList<CheckBox> selectedCheckboxes = new ArrayList<>();
@@ -27,7 +26,6 @@ public class CoffeeController {
 
     private static ArrayList<Coffee> addedCoffee = new ArrayList<Coffee>();
     private static Coffee currentCoffee;
-
     private RUCafeController controller;
 
     /**
@@ -38,12 +36,8 @@ public class CoffeeController {
         this.controller = controller;
     }
 
-/*    public static ArrayList<Coffee> getAddedCoffee(){
-        return addedCoffee;
-    }*/
-
     /**
-     *
+     * Resets the temporary coffee order to null if it isn't already null
      */
     public static void resetOrderCoffee(){
         if(addedCoffee != null){
@@ -52,7 +46,7 @@ public class CoffeeController {
     }
 
     /**
-     *
+     * contains all the set on action methods for the interactable UI
      */
     public void initialize() {
         num_coffee.setItems(FXCollections.observableArrayList(1, 2, 3, 4, 5));
@@ -65,7 +59,7 @@ public class CoffeeController {
         cb_Caramel.setOnAction(e -> handleCheckboxSelection(cb_Caramel));
 
         /**
-         *
+         * creates a coffee object based on the parameters selected
          */
         coffee_add.setOnAction(event -> {
             if (subtotal <= 0) {
@@ -87,7 +81,7 @@ public class CoffeeController {
     }
 
     /**
-     *
+     * controls the checkboxes of the add-ins to have only a maximum selected boxes
      * @param checkbox
      */
     private void handleCheckboxSelection(CheckBox checkbox) {
@@ -100,16 +94,11 @@ public class CoffeeController {
         } else {
             selectedCheckboxes.remove(checkbox);
         }
-
         updateSubtotal();
     }
-/*
-    private void handleCoffeeAdd() {
-        updateSubtotal();
-    }*/
 
     /**
-     *
+     * Updates the subtotal based on what parameters are selected
      */
     private void updateSubtotal() {
         int numCups = num_coffee.getValue() == null ? 0 : num_coffee.getValue();

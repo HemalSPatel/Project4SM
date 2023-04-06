@@ -6,10 +6,15 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 
+/**
+ * application class for the entire project
+ * and it launches the application
+ * @author Hemal Patel, Ishika Patel
+ */
 public class RUCafeApplication extends Application {
     @Override
     /**
-     *
+     * starts the application with the first fxml file view
      */
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(RUCafeApplication.class.getResource("rucafe-view.fxml"));
@@ -19,10 +24,7 @@ public class RUCafeApplication extends Application {
         stage.show();
     }
 
-    /**
-     *
-     * @param args
-     */
+
     public static void main(String[] args) {
         launch();
     }

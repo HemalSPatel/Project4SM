@@ -2,12 +2,17 @@ package com.example.rucafe.project4sm;
 
 import java.util.ArrayList;
 
+/**
+ * Coffee class creates the structure of a coffee instance and contains
+ * methods to access its information
+ * @author Hemal Patel, Ishika Patel
+ */
 public class Coffee extends MenuItem {
     private String cupSize;
     private ArrayList<String> addIns;
 
     /**
-     *
+     * Constructor for a coffee menu item
      * @param cupSize
      * @param amount
      */
@@ -38,7 +43,7 @@ public class Coffee extends MenuItem {
     }
 
     /**
-     * Adds additional adsd ins to the arraylist and updates the price of the coffee
+     * Adds additional add-ins to the arraylist and updates the price of the coffee
      * @param addIn
      */
     public void addAddIn(String addIn) {
@@ -48,19 +53,11 @@ public class Coffee extends MenuItem {
 
     /**
      * overrides the abstract method and returns the price of the item
-     * @return
+     * @return price of the menu item
      */
     @Override
     public double itemPrice() {
         return getPrice();
-    }
-
-    /**
-     * getter method for private instance variable cub size
-     * @return the cup size
-     */
-    public String getCupSize() {
-        return cupSize;
     }
 
     /**
@@ -72,8 +69,8 @@ public class Coffee extends MenuItem {
     }
 
     /**
-     *
-     * @return
+     * toString method for a coffee object
+     * @return a string of the size, item, amount, and all add-ins
      */
     public String toString(){
         String end = "";

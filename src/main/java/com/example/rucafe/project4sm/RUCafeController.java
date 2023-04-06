@@ -12,6 +12,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * controller class for the ru cafe fxml file that connects the UI to the backend
+ * @author Hemal Patel, Ishika Patel
+ */
 public class RUCafeController {
 
     @FXML
@@ -27,15 +31,13 @@ public class RUCafeController {
 
     private StoreOrder storeOrders;
 
-
+    /**
+     * loads the donut fxml file when the donut button is clicked
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void onOrderDonutClick(ActionEvent event) throws IOException {
-//        Parent root = FXMLLoader.load(getClass().getResource ("donut-view.fxml"));
-//        Scene scene = new Scene (root);
-//        Stage primaryStage = new Stage ();
-//        primaryStage.setTitle("Order Donut");
-//        primaryStage.setScene (scene);
-
         FXMLLoader fxmlLoader = new FXMLLoader(RUCafeApplication.class.getResource("donut-view.fxml"));
 
         Stage primaryStage = new Stage();
@@ -51,14 +53,13 @@ public class RUCafeController {
         primaryStage.show();
     }
 
+    /**
+     * loads the coffee fxml file view when the coffee button is clicked
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void onOrderCoffeeClick(ActionEvent event) throws IOException {
-//        Parent root = FXMLLoader.load(getClass().getResource ("coffee-view.fxml"));
-//        Scene scene = new Scene (root);
-//        Stage primaryStage = new Stage ();
-//        primaryStage.setTitle("Order Coffee");
-//        primaryStage.setScene (scene);
-
         FXMLLoader fxmlLoader = new FXMLLoader(RUCafeApplication.class.getResource("coffee-view.fxml"));
 
         Stage primaryStage = new Stage();
@@ -73,14 +74,13 @@ public class RUCafeController {
         primaryStage.show();
     }
 
+    /**
+     * loads the basket view fxml file when the basket button is clicked
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void onYourOrderClick(ActionEvent event) throws IOException {
-//        Parent root = FXMLLoader.load(getClass().getResource ("basket-view.fxml"));
-//        Scene scene = new Scene (root);
-//        Stage primaryStage = new Stage ();
-//        primaryStage.setTitle("Your Order");
-//        primaryStage.setScene (scene);
-
         FXMLLoader fxmlLoader = new FXMLLoader(RUCafeApplication.class.getResource("basket-view.fxml"));
         Stage primaryStage = new Stage();
         primaryStage.setTitle("Your Order");
@@ -88,56 +88,40 @@ public class RUCafeController {
 
         BasketController basketController = fxmlLoader.getController();
         basketController.setMainController(this);
-
-
         try {
             basketController.getBasket().getItems().addAll(currentOrder.getOrder());
-        } catch (Exception e) {
-
-        }
+        } catch (Exception e) { }
         if(currentOrder != null){
             basketController.calculateSubTotal();
         }
-
-
         primaryStage.initModality (Modality.APPLICATION_MODAL);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
+    /**
+     * loads the store order view fxml file when the store order button is clicked
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void onStoreOrderClick(ActionEvent event) throws IOException {
-//        Parent root = FXMLLoader.load(getClass().getResource ("store-order-view.fxml"));
-//        Scene scene = new Scene (root);
-//        Stage primaryStage = new Stage ();
-//        primaryStage.setTitle("Store Orders");
-//        primaryStage.setScene (scene);
-
-
-
         FXMLLoader fxmlLoader = new FXMLLoader(RUCafeApplication.class.getResource("store-order-view.fxml"));
-
         Stage primaryStage = new Stage();
         primaryStage.setTitle("Store Orders");
         Scene scene = new Scene(fxmlLoader.load(), 650, 750);
-
         StoreController storeController = fxmlLoader.getController();
         storeController.setMainController(this);
-
         try {
             for(int i=0; i<storeOrders.getStoreOrders().size(); i++){
                 storeController.getOrderNumber().getItems().add(i+1);
             }
-        }catch (Exception e){
-
-        }
-
+        }catch (Exception e){        }
         primaryStage.initModality (Modality.APPLICATION_MODAL);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
-    //-------------------------
     /**
      * Adds a menu item to the current order.
      * @param item to be added to current order.
@@ -189,4 +173,3 @@ public class RUCafeController {
         return storeOrders;
     }
 }
-    // when placing an order you and put up a alert window to notify the user that their order has been placed

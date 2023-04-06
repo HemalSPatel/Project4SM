@@ -7,6 +7,11 @@ import javafx.scene.control.*;
 import java.text.DecimalFormat;
 import java.util.*;
 
+/**
+ * Controller class for the basket fxml file to allow the user to
+ * interact with the UI
+ * @author Hemal Patel, Ishika Patel
+ */
 public class BasketController {
     @FXML private ListView<MenuItem> lv_order;
     @FXML private TextField tf_sub;
@@ -17,21 +22,6 @@ public class BasketController {
 
     private DonutController donutController;
     private CoffeeController coffeeController;
-
-/*
-    private StoreOrder storeOrders;
-
-    private static int orderNum = 0;
-*/
-
-/*
-    public void setDonutController(DonutController controller) {
-        donutController = controller;
-    }
-
-    private static ArrayList<MenuItem> order;
-*/
-
     private RUCafeController controller;
 
     /**
@@ -41,19 +31,9 @@ public class BasketController {
     public void setMainController(RUCafeController controller){
         this.controller = controller;
     }
-/*
-    public static ArrayList<MenuItem> getOrder(){
-        return order;
-    }
-
-    public static void resetOrder(){
-        if(order != null){
-            order.clear();
-        }
-    }*/
 
     /**
-     *
+     * Calculates the subtotal of the current items in the basket
      */
     public void calculateSubTotal(){
         ArrayList<MenuItem> order = controller.getCurrentOrder().getOrder();
@@ -70,46 +50,23 @@ public class BasketController {
     }
 
     /**
-     *
+     * Contains all the set on action for the interactable function of the UI
      */
     public void initialize() {
 
-        //updates list for the order and prints it out
-
-        //order = new ArrayList<MenuItem>();
-
-        //order.addAll(donutController.getDonutOrder());
-        //order.addAll(coffeeController.getAddedCoffee());
-/*
-            for(MenuItem e: controller.getCurrentOrder().getItems()){
-                if(e != null){
-                    lv_order.getItems().add(e);
-                }
-            }*/
-        //calculateSubTotal(controller.getCurrentOrder().getOrder());
-
-
         /**
-         *
+         * Removes the selected item from the basket
          */
         b_remove.setOnAction(event -> {
-            int selectedID = lv_order.getSelectionModel().getSelectedIndex();
-//            order.remove(selectedID);
-//            lv_order.getItems().remove(selectedID);
             MenuItem removeMI = lv_order.getSelectionModel().getSelectedItem();
             controller.removeFromOrder(removeMI);
             lv_order.getItems().remove(lv_order.getSelectionModel().getSelectedItem());
             calculateSubTotal();
 
-//            if(order.get(selectedID) instanceof Coffee) {
-//                CoffeeController.getAddedCoffee().remove(order.get(selectedID));
-//            } else {
-//                DonutController.getDonutOrder().remove(order.get(selectedID));
-//            }
         });
 
         /**
-         *
+         * Finalize the order based on what is in the basket at the time
          */
         b_place.setOnAction(event -> {
             if (controller.getCurrentOrder().getOrder().size() == 0) {
@@ -122,35 +79,16 @@ public class BasketController {
                 String total = tf_total.getText().substring(1);
                 controller.getCurrentOrder().setTotalPrice(Double.parseDouble(total));
                 controller.addToStoreOrder();
-                //System.out.println(StoreController.allOrders.get(0));
-//                order.removeAll(donutController.getDonutOrder());
-//                order.removeAll(coffeeController.getAddedCoffee());
-                //order.clear();
                 donutController.resetOrderDonut();
                 coffeeController.resetOrderCoffee();
                 calculateSubTotal();
-/*
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("store-order-view.fxml"));
-                    //BorderPane root = (BorderPane) loader.load();
-                    StoreController storecontroller = loader.getController();
-                    storecontroller.setBasketController(this);
-                } catch (NullPointerException e) {
-                }*/
-
             }
         });
     }
-/*
-    public void addToStoreOrder() {
-        if (StoreController.allOrders == null) StoreController.allOrders = new ArrayList<Order>();
-        Order curOrder = new Order();
-        StoreController.allOrders.add(curOrder);
-    }*/
 
     /**
-     *
-     * @return
+     * retrieves the menu items that are in the basket at that time
+     * @return list of menu items
      */
     public ListView<MenuItem> getBasket() {
         return lv_order;

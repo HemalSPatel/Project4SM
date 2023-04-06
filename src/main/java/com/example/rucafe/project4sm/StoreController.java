@@ -8,6 +8,11 @@ import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+/**
+ * Controller class for the store order fxml file to connect to the UI
+ * to the backend
+ * @author Hemal Patel, Ishika Patel
+ */
 public class StoreController {
     @FXML
     private Button b_cancel;
@@ -29,15 +34,14 @@ public class StoreController {
         this.controller = controller;
     }
 
-    public static ArrayList<Order> allOrders;
-
     /**
-     *
+     * contains all the set on action events for the interactable
+     * components on the UI
      */
     public void initialize() {
         DecimalFormat df = new DecimalFormat("#.00");
         /**
-         *
+         *deletes the order that is on the page from the list of store orders
          */
         b_cancel.setOnAction(event -> {
             int remove = cb_ordernum.getSelectionModel().getSelectedIndex();
@@ -53,7 +57,8 @@ public class StoreController {
         });
 
         /**
-         *
+         * exports all the current orders of the store to a txt file named orders
+         * which contains the order number, total, and menu items of that oder
          */
         b_export.setOnAction(event -> {
             ArrayList<Order> allOrders = controller.getStoreOrders().getStoreOrders();
@@ -83,7 +88,8 @@ public class StoreController {
         });
 
         /**
-         *
+         * sets the list based on the order number clicked to show the menu items
+         * of that certain order
          */
         cb_ordernum.setOnAction(event ->{
             Order selected;
@@ -100,8 +106,8 @@ public class StoreController {
     }
 
     /**
-     *
-     * @return
+     * getter method for the selected order number
+     * @return combo box integer
      */
     public ComboBox<Integer> getOrderNumber() {
         return cb_ordernum;

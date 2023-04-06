@@ -1,11 +1,16 @@
 package com.example.rucafe.project4sm;
 
+/**
+ * Donut class creates instances of donuts and allows method
+ * to access information about a donut
+ * @author Hemal Patel, Ishika Patel
+ */
 public class Donut extends MenuItem {
     private String type;
     private String flavor;
 
     /**
-     *
+     * Constructor for a donut object
      * @param type
      * @param flavor
      * @param amount
@@ -61,8 +66,8 @@ public class Donut extends MenuItem {
     }
 
     /**
-     *
-     * @return
+     * to String method for a donut object
+     * @return string of the item name, flavor, and the amount of the donut
      */
     public String toString(){
         return getItemName() + " (" + getAmount() + ")";

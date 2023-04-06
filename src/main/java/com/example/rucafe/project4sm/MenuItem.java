@@ -1,12 +1,17 @@
 package com.example.rucafe.project4sm;
 
+/**
+ * abstract class of a menu item that has the structure
+ * of what is needed in an item
+ * @author Hemal Patel, Ishika Patel
+ */
 public abstract class MenuItem {
     private String itemName;
     private double price;
     private int amount;
 
     /**
-     *
+     * Constructor for a menu item object
      * @param itemName
      * @param price
      * @param amount
@@ -23,14 +28,6 @@ public abstract class MenuItem {
      */
     public String getItemName() {
         return itemName;
-    }
-
-    /**
-     * setter method for instance variable item name
-     * @param itemName
-     */
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
     }
 
     /**
@@ -56,8 +53,8 @@ public abstract class MenuItem {
     public abstract double itemPrice();
 
     /**
-     *
-     * @return
+     * returns the amount of items for that certain menu item
+     * @return number of duplicates of that menu item
      */
     public int getAmount(){
         return amount;

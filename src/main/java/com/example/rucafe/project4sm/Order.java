@@ -2,13 +2,19 @@ package com.example.rucafe.project4sm;
 
 import java.util.ArrayList;
 
+/**
+ * order class has the structure of what is needed in an order
+ * and contains methods that allow one to change or access information or
+ * an order
+ * @author Hemal Patel, Ishika Patel
+ */
 public class Order {
 
     private double totalPrice;
     private ArrayList<MenuItem> order;
 
     /**
-     *
+     * Constructor for an order object
      */
     public Order() {
         order = new ArrayList<MenuItem>();
@@ -16,62 +22,25 @@ public class Order {
     }
 
     /**
-     * appends a menu item to the order list
-     * @param item
-     */
-    public void addItem(MenuItem item) {
-        order.add(item);
-    }
-
-    /**
-     * removes a menu item from the order list
-     * @param item
-     */
-    public void removeItem(MenuItem item) {
-        order.remove(item);
-    }
-
-    /**
-     * calculates the running total for all of the menu items in the order
-     * @return total price of items
-     */
-    public double getOrderTotal() {
-        double total = 0.0;
-        for (MenuItem item : order) {
-            total += item.itemPrice();
-        }
-        return total;
-    }
-
-    /**
-     *
+     * sets the total price of an order from the given numebr
      * @param price
      */
     public void setTotalPrice(double price){
         this.totalPrice = price;
     }
 
-
     /**
-     * getter method for all the items in the order
-     * @return an array list of all the menu items
-     */
-    public ArrayList<MenuItem> getItems() {
-        return order;
-    }
-
-    /**
-     *
-     * @return
+     * getter method for the private instance variable total price
+     * @return double of the price
      */
     public double getTotalPrice(){
         return totalPrice;
     }
 
     /**
-     *
+     * adds the given object to the end of the order
      * @param obj
-     * @return
+     * @return true if the item was successfully added and false if not
      */
     public boolean add(Object obj) {
         if(obj instanceof MenuItem){
@@ -83,9 +52,9 @@ public class Order {
     }
 
     /**
-     *
+     * removed the given object from the order list
      * @param obj
-     * @return
+     * @return true if the item was successfully removed and false if not
      */
     public boolean remove(Object obj){
         if(obj instanceof MenuItem){
@@ -97,8 +66,8 @@ public class Order {
     }
 
     /**
-     *
-     * @return
+     * To string method for an order object
+     * @return string containing the order menu items
      */
     public String toString(){
         String endString = "";
@@ -110,8 +79,8 @@ public class Order {
     }
 
     /**
-     *
-     * @return
+     * getter method for private instance variable order
+     * @return array list of menu items
      */
     public ArrayList<MenuItem> getOrder() {
         return order;

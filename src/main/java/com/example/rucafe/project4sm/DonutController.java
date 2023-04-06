@@ -9,6 +9,11 @@ import javafx.scene.image.ImageView;
 import java.text.DecimalFormat;
 import java.util.*;
 
+/**
+ * Controller class for the donut fxml file to allow the program to react to
+ * user interactions
+ * @author Hemal Patel, Ishika Patel
+ */
 public class DonutController {
     ObservableList<String> yeastf = FXCollections.observableArrayList("Jelly", "Glazed", "Chocolate Frost", "Strawberry Frost", "Powdered", "Maple Frost");
     ObservableList<String> cakef = FXCollections.observableArrayList("Old Fashion", "Cinnamon Sugar", "Blueberry");
@@ -25,6 +30,7 @@ public class DonutController {
     @FXML private Button b_donutremove;
     @FXML private ImageView image_donut;
     private RUCafeController controller;
+    private static ArrayList<Donut> donutOrder = new ArrayList<Donut>();
 
     /**
      * Sets the main controller for this controller.
@@ -35,12 +41,7 @@ public class DonutController {
     }
 
     /**
-     *
-     */
-    private static ArrayList<Donut> donutOrder = new ArrayList<Donut>();
-
-    /**
-     *
+     * resets the arraylist of the temporary donut order to null if it already isn't
      */
     public static void resetOrderDonut(){
         if(donutOrder != null){
@@ -49,9 +50,9 @@ public class DonutController {
     }
 
     /**
-     *
+     * finds the donut object in the array list based on the flavor given
      * @param flavor
-     * @return
+     * @return donut object of that falvor
      */
     private Donut findDonut(String flavor){
         for(Donut e : donutOrder){
@@ -63,7 +64,7 @@ public class DonutController {
     }
 
     /**
-     *
+     * contains all the set on action types for the UI
      */
     public void initialize() {
         combo_donut_type.setItems(FXCollections.observableArrayList("Yeast", "Cake", "Donut Holes"));
@@ -76,7 +77,7 @@ public class DonutController {
         donutFlavors.put("Donut Holes", holef);
 
         /**
-         *
+         * Changes the list of flavors of donuts based on what type of donut is selected
          */
         combo_donut_type.setOnAction(event -> {
             String selectedDonut = combo_donut_type.getValue();
@@ -88,7 +89,8 @@ public class DonutController {
         });
 
         /**
-         *
+         * Creates a donut object to add to the right side list so that the user
+         * knows what is in their temporary order
          */
         b_donutadd.setOnAction(event -> {
             String selectedItem = lv_donutflavor.getSelectionModel().getSelectedItem();
@@ -109,17 +111,13 @@ public class DonutController {
                         flavors = FXCollections.observableArrayList(holef);
                         break;
                 }
-
                 flavors.remove(selectedItem);
                 lv_donutflavor.setItems(flavors);
                 lv_donutpicked.getItems().add(selectedItem + " (" + selectedNum + ")");
                 subtotal += addedDonut.getAmount() * addedDonut.itemPrice();
                 tf_donutSub.setText("$" + df.format(subtotal));
-
-
                 Donut removing = findDonut(selectedItem);
                 String sDonut = removing.getType();
-
                 if (sDonut.equalsIgnoreCase("Yeast")) {
                     yeastf.remove(selectedItem);
                 } else if (sDonut.equalsIgnoreCase("Cake")) {
@@ -131,7 +129,7 @@ public class DonutController {
         });
 
         /**
-         *
+         * removes the selected donut from the right side list when the remove button is clicked
          */
         b_donutremove.setOnAction(event -> {
             String selectedItem = lv_donutpicked.getSelectionModel().getSelectedItem();
@@ -160,7 +158,7 @@ public class DonutController {
         });
 
         /**
-         *
+         * adds the temporary donut order to the cart and alerts the user of their status
          */
         b_addDonutOrder.setOnAction(event -> {
             if (subtotal <= 0) {
@@ -175,16 +173,7 @@ public class DonutController {
                 donutOrder.clear();
                 tf_donutSub.setText("$0.00");
                 lv_donutpicked.getItems().removeAll(lv_donutpicked.getItems());
-               /* try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("basket-view.fxml"));
-                    BorderPane root = (BorderPane) loader.load();
-                    BasketController basketcontroller = loader.getController();
-                    basketcontroller.setDonutController(this);
-                } catch (IOException e) {*/
-                    //throw new RuntimeException(e);
                 }
-
-
         });
 
     }
