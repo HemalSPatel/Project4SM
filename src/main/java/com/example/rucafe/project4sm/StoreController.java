@@ -65,11 +65,21 @@ public class StoreController {
 
 
         b_cancel.setOnAction(event -> {
-            int selectedNum = (int) cb_ordernum.getValue();
+//            int selectedNum = (int) cb_ordernum.getValue();
+//            lv_storeorders.getItems().clear();
+//            allOrders.remove(selectedNum-1);
+//            resetCombo(allOrders);
+//            tf_total.setText("$0.00");
+            int remove = cb_ordernum.getSelectionModel().getSelectedIndex();
             lv_storeorders.getItems().clear();
-            allOrders.remove(selectedNum-1);
-            resetCombo(allOrders);
-            tf_total.setText("$0.00");
+            //total.setText("$0.00");
+            if(remove >= 0) {
+                controller.removeFromStoreOrder(controller.getStoreOrders().getStoreOrders().get(remove));
+                cb_ordernum.getItems().removeAll(cb_ordernum.getItems());
+                for(int i = 0; i < controller.getStoreOrders().getStoreOrders().size(); i ++){
+                    cb_ordernum.getItems().add(i+1);
+                }
+            }
         });
 
         b_export.setOnAction(event -> {
