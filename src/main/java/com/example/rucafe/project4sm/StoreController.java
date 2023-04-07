@@ -107,7 +107,7 @@ public class StoreController {
 
     /**
      * getter method for the selected order number
-     * @return combo box integer
+     * @return combo box numbers
      */
     public ComboBox<Integer> getOrderNumber() {
         return cb_ordernum;

@@ -5,6 +5,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import java.util.ArrayList;
 
+/**
+ * Controller class for the coffee fxml file to create the functionality
+ * of the UI that the user interacts with
+ * @author Hemal Patel, Ishika Patel
+ */
 public class CoffeeController {
     private final int MAX_SELECTIONS = 2;
     double subtotal =0;
@@ -116,7 +121,6 @@ public class CoffeeController {
                     sizePrice = sizePriceIncrement * 3;
                     break;
                 default:
-                    // Short has base price 0, no need to add anything
                     break;
             }
         }
